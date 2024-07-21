@@ -1,0 +1,26 @@
+--script : Phoenix DDL (HBase DDL) CCDA
+-owner : Sayu Softtech 
+--Creation date : 08102022
+--modified date 
+
+Go to 
+$cd /usr/lib/phoenix/bin
+/usr/lib/phoenix/bin/sqlline.py localhost
+
+#show tables
+!tables
+
+----------------------------
+CREATE TABLE COUNTRY_HB (cn_id VARCHAR(10) PRIMARY KEY,cn_name VARCHAR(45));
+CREATE TABLE CITY_HB (ct_id VARCHAR(10) PRIMARY KEY,ct_name VARCHAR(45),cn_id VARCHAR(10));
+CREATE TABLE CARD_TYPE_HB (c_type VARCHAR(10) PRIMARY KEY,max_limit INTEGER);
+CREATE TABLE TX_TYPE_HB (tx_type_id VARCHAR(10) PRIMARY KEY,tx_type_desc VARCHAR(45));
+
+CREATE TABLE ADDRESS_HB (add_id VARCHAR(10) PRIMARY KEY,Street VARCHAR(45),ct_id VARCHAR(10));
+CREATE TABLE CARD_HB ( c_number INTEGER PRIMARY KEY,full_name VARCHAR(45),mob INTEGER,email VARCHAR(45),issue_date TIMESTAMP,update_date TIMESTAMP,exp_date TIMESTAMP,billing_date INTEGER,c_limit INTEGER,act_flag VARCHAR(20),add_id VARCHAR(10),c_type VARCHAR(10));
+
+CREATE TABLE CC_DEBIT_HB (c_number INTEGER,tx_id VARCHAR(45) PRIMARY KEY,tx_date TIMESTAMP,amt_spend INTEGER,category VARCHAR(45),d_status VARCHAR(10));
+
+CREATE TABLE CC_PAID_HB (c_number INTEGER,tx_id VARCHAR(45) PRIMARY KEY,tx_date TIMESTAMP,amt_paid INTEGER,c_status VARCHAR(45),tx_type_id VARCHAR(10));
+
+commit;
